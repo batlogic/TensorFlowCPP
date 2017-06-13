@@ -76,17 +76,17 @@ My container started without the latest revision of the Ubuntu's tools, and does
   
   B.8.d. ./bazel-0.5.1-installer-linux-x86_64.sh --user
   
-  B.8.e.  ln -s /root/.bazel/bin/bazel /usr/bin/bazel
+  B.8.e.  ln -s $HOME/.bazel/bin/bazel /usr/bin/bazel
   
 
 C. Install the C++ project's prerequisites libraries:
 -
 
-  C.1. Create your projects main directory, it will contain all the source codes of your projects and its libraries. In my case I'm the root user and my existing home directory is: /root/
+  C.1. Create your projects main directory, it will contain all the source codes of your projects and its libraries.
   
-  C.1.a. mkdir /root/projects
+  C.1.a. mkdir $HOME/projects
   
-  C.1.b. cd /root/projects
+  C.1.b. cd $HOME/projects
 
   C.2. **Installing Intel MKL & IPP:**
   
@@ -186,9 +186,10 @@ D. Installing TensorFlow
   
   D.8. Copy the shared object into the library include path:
   
+  D.8.a. cd $HOME
   D.8.a. find . | grep libtensorflow_cc.so **⇒** Find the output of bazel
   
-  D.8.b. cp /root/.cache/bazel/_bazel_root/f44a66ea342b732c36ce6e6074c4ff93/execroot/tensorflow/bazel-out/local-opt/bin/tensorflow/libtensorflow_cc.so /usr/local/lib/libtensorflow_cc.so
+  D.8.b. cp $HOME/.cache/bazel/_bazel_$USER/f44a66ea342b732c36ce6e6074c4ff93/execroot/tensorflow/bazel-out/local-opt/bin/tensorflow/libtensorflow_cc.so /usr/local/lib/libtensorflow_cc.so
   
   D.8.c. chmod 644 /usr/local/lib/libtensorflow_cc.so 
 
