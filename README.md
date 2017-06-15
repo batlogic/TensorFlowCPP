@@ -130,7 +130,7 @@ C. Install the C++ project's prerequisites libraries:
   
   C.4.e. make install
 
-  C.5. **Installing vlfeat: **
+  C.5. **Installing vlfeat:**
   
   C.5.a. The vlfeat library can be found at: http://www.vlfeat.org/
   
@@ -184,7 +184,7 @@ D. Installing TensorFlow
   
   D.7. bazel build -c opt --copt=-mavx --copt=-mavx2 --copt=-mfma --copt=-mfpmath=both --copt=-msse4.2  --copt=-msse4.1 --copt=-march=native tensorflow:libtensorflow_cc.so **⇒** I could not find a way to use a static library of TF
   
-  D.8. Copy the shared object into the library include path:
+  D.8. **Copy the shared object into the library include path:**
   
   D.8.a. cd $HOME
   
