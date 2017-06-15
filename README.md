@@ -187,11 +187,12 @@ D. Installing TensorFlow
   D.8. Copy the shared object into the library include path:
   
   D.8.a. cd $HOME
-  D.8.a. find . | grep libtensorflow_cc.so **⇒** Find the (latest) output of bazel
   
-  D.8.b. cp $HOME/.cache/bazel/_bazel_$USER/f44a66ea342b732c36ce6e6074c4ff93/execroot/tensorflow/bazel-out/local-opt/bin/tensorflow/libtensorflow_cc.so /usr/local/lib/libtensorflow_cc.so
+  D.8.b. find . | grep libtensorflow_cc.so **⇒** Find the (latest) output of bazel
   
-  D.8.c. chmod 644 /usr/local/lib/libtensorflow_cc.so 
+  D.8.c. cp $HOME/.cache/bazel/_bazel_$USER/f44a66ea342b732c36ce6e6074c4ff93/execroot/tensorflow/bazel-out/local-opt/bin/tensorflow/libtensorflow_cc.so /usr/local/lib/libtensorflow_cc.so
+  
+  D.8.d. chmod 644 /usr/local/lib/libtensorflow_cc.so 
 
 E. Install your project...
 -
