@@ -8,16 +8,14 @@ namespace tf {
     using namespace ::tensorflow::ops;
 
     tf::Output FullyConnectedLinear(tf::ClientSession& session, const tf::Scope& scope, tf::Input inp, const int sizeOutput) {
-        std::vector<tf::Output> assignments;
         const int size_input = inp.tensor().shape().dim_size(1); // dim_size(1) == number of columns
-        auto tf_dt   = inp.data_type();
-        auto weights = tf::Variable(scope, {size_input,sizeOutput}, tf_dt);
-        assignments.push_back(tf::Assign(scope, weights, tf::TruncatedNormal(scope, weights, tf_dt)));
-        auto biases  = tf::Variable(scope, {sizeOutput}, tf_dt);
-        assignments.push_back(tf::Assign(scope, biases, tf::ZerosLike(scope, biases)));
-        auto result  = tf::Add (scope, tf::MatMul(scope, inp, weights), biases);
-        TF_CHECK_OK(session.Run(assignments, nullptr));
-        return result;
+        auto tf_dt    = inp.data_type();
+        auto weights  = tf::Variable(scope, {size_input,sizeOutput}, tf_dt);
+        auto assign_w = tf::Assign(scope, weights, tf::TruncatedNormal(scope, weights, tf_dt));
+        auto biases   = tf::Variable(scope, {sizeOutput}, tf_dt);
+        auto assign_b = tf::Assign(scope, biases, tf::ZerosLike(scope, biases));
+        TF_CHECK_OK(session.Run({assign_w,assign_b}, nullptr));
+        return tf::Add (scope, tf::MatMul(scope, inp, weights), biases);
     }
 }
 
@@ -45,7 +43,7 @@ int main(int argc, char* argv[]) {
                                          0/*m*/,0/*v*/,0.9/*beta1_power*/,0.999/*beta2_power*/,alpha/*lr == learning rate*/,
                                          0.9/*beta1*/,0.999/*beta2*/,1e-6/*epsilon*/, 0.001 /*grad*/);
 
-    //TF_CHECK_OK(session.Run({{"x", x}}, {"train"}, nullptr));
+    //TF_CHECK_OK(session.Run({{"input", x}, {"output", y}}, {"train"}, nullptr));
     return 0;
 
 }
